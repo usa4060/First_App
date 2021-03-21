@@ -70,9 +70,6 @@ Widget myComunityText(String textName, String firstText) {
             color: Colors.black,
           ),
         ),
-        Container(
-          height: 5,
-        ),
       ],
     ),
   );
