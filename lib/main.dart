@@ -14,11 +14,87 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: Colors.lightGreen[100],
           appBarTheme: AppBarTheme(
               color: Colors.white,
-              textTheme: TextTheme(title: TextStyle(color: Colors.red)),
+              textTheme: TextTheme(title: TextStyle(color: Colors.green[400])),
               centerTitle: true)),
       home: MooJaeBae(),
     );
   }
+}
+
+class SecondPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text(
+          'Second Page',
+        ),
+        //backgroundColor: Colors.white,
+      ),
+      body: Center(
+        child: FlatButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          child: Text(
+            "뒤로 가기",
+            style: TextStyle(color: Colors.green[400]),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+Widget myComunityText(String textName, String firstText) {
+  return Padding(
+    padding: EdgeInsets.fromLTRB(18.0, 0.0, 0.0, 0.0),
+    child: Row(
+      children: <Widget>[
+        Text(
+          textName,
+          style: TextStyle(
+            fontSize: 13,
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        Container(
+          width: 30,
+        ),
+        Text(
+          firstText,
+          style: TextStyle(
+            fontSize: 13,
+            color: Colors.black,
+          ),
+        ),
+        Container(
+          height: 5,
+        ),
+      ],
+    ),
+  );
+}
+
+Widget myButton(context, String name, String image) {
+  return FlatButton(
+    onPressed: () {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => SecondPage()));
+    },
+    child: Column(
+      children: [
+        Container(
+          height: 60,
+          width: 60,
+          child: Image.asset(image),
+        ),
+        Text(name)
+      ],
+    ),
+  );
 }
 
 //jhhj
@@ -28,24 +104,6 @@ class MooJaeBae extends StatelessWidget {
   //함수에 전달하는 인자를 달리하여 형태를 다르게 만들어 줄 수도 있고, 나중에 전체적인 디자인을 수정할 때도 하나하나 수정하는 것보다
   //한꺼번에 수정할 수 있게 되기 때문입니다.며
   //3-2에서 이 함수를 호출한 내용도 봐주세요.
-  Widget myButton(context, String name, String image) {
-    return FlatButton(
-      onPressed: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => SecondPage()));
-      },
-      child: Column(
-        children: [
-          Container(
-            height: 60,
-            width: 60,
-            child: Image.asset(image),
-          ),
-          Text(name)
-        ],
-      ),
-    );
-  }
 
 //test
   @override
@@ -67,10 +125,11 @@ class MooJaeBae extends StatelessWidget {
           SizedBox(
             height: 180.0,
             width: 9000.0,
+
             //2. 이미지가 선택된 영역에 채워지는 방법을 골라주는 요소: fit
             child: Image.asset(
               'assets/lion.png',
-              fit: BoxFit.cover,
+              //fit: BoxFit.cover,
             ),
           ),
           Container(
@@ -141,86 +200,10 @@ class MooJaeBae extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: <Widget>[
-                              FlatButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => SecondPage()),
-                                  );
-                                },
-                                child: Container(
-                                  height: 60,
-                                  width: 60,
-                                  child: Image.asset('assets/5.png'),
-                                ),
-                              ),
-                              FlatButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => SecondPage()),
-                                  );
-                                },
-                                child: Container(
-                                  height: 60,
-                                  width: 60,
-                                  child: Image.asset('assets/6.png'),
-                                ),
-                              ),
-                              FlatButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => SecondPage()),
-                                  );
-                                },
-                                child: Container(
-                                  height: 60,
-                                  width: 60,
-                                  child: Image.asset('assets/7.png'),
-                                ),
-                              ),
-                              FlatButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => SecondPage()),
-                                  );
-                                },
-                                child: Container(
-                                  height: 60,
-                                  width: 60,
-                                  child: Image.asset('assets/8.png'),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: <Widget>[
-                              Text(
-                                '인챈트',
-                                style: TextStyle(fontWeight: FontWeight.bold),
-                              ),
-                              Text(
-                                '포션',
-                                style: TextStyle(fontWeight: FontWeight.bold),
-                              ),
-                              Text(
-                                '주민',
-                                style: TextStyle(fontWeight: FontWeight.bold),
-                              ),
-                              Text(
-                                '공략',
-                                style: TextStyle(fontWeight: FontWeight.bold),
-                              ),
+                              myButton(context, "인챈트", 'assets/5.png'),
+                              myButton(context, "포션", 'assets/6.png'),
+                              myButton(context, "주민", 'assets/7.png'),
+                              myButton(context, "공략", 'assets/8.png'),
                             ],
                           ),
                         ),
@@ -253,138 +236,23 @@ class MooJaeBae extends StatelessWidget {
                         SizedBox(
                           height: 15.0,
                         ),
-                        Padding(
-                            padding: EdgeInsets.fromLTRB(18.0, 0.0, 0.0, 0.0),
-                            child: Row(
-                              children: <Widget>[
-                                Text(
-                                  '자유게시판',
-                                  style: TextStyle(
-                                    fontSize: 13,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                Container(
-                                  width: 30,
-                                ),
-                                Text(
-                                  '안녕하세요 잘부탁드립니다.',
-                                  style: TextStyle(
-                                    fontSize: 13,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                              ],
-                            )),
+                        myComunityText('자유게시판', '안녕하세요 잘부탁드립니다.'),
                         Container(
                           height: 5,
                         ),
-                        Padding(
-                            padding: EdgeInsets.fromLTRB(18.0, 0.0, 0.0, 0.0),
-                            child: Row(
-                              children: <Widget>[
-                                Text(
-                                  '서버게시판',
-                                  style: TextStyle(
-                                    fontSize: 13,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                Container(
-                                  width: 30,
-                                ),
-                                Text(
-                                  '같이 게임하실 분 구해요~',
-                                  style: TextStyle(
-                                    fontSize: 13,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                              ],
-                            )),
+                        myComunityText('자유게시판', '안녕하세요 잘부탁드립니다.'),
                         Container(
                           height: 5,
                         ),
-                        Padding(
-                            padding: EdgeInsets.fromLTRB(18.0, 0.0, 0.0, 0.0),
-                            child: Row(
-                              children: <Widget>[
-                                Text(
-                                  '비밀게시판',
-                                  style: TextStyle(
-                                    fontSize: 13,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                Container(
-                                  width: 30,
-                                ),
-                                Text(
-                                  '비밀글 입니다..',
-                                  style: TextStyle(
-                                    fontSize: 13,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                              ],
-                            )),
+                        myComunityText('자유게시판', '안녕하세요 잘부탁드립니다.'),
                         Container(
                           height: 5,
                         ),
-                        Padding(
-                            padding: EdgeInsets.fromLTRB(18.0, 0.0, 0.0, 0.0),
-                            child: Row(
-                              children: <Widget>[
-                                Text(
-                                  '비밀게시판',
-                                  style: TextStyle(
-                                    fontSize: 13,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                Container(
-                                  width: 30,
-                                ),
-                                Text(
-                                  '비밀글 입니다..',
-                                  style: TextStyle(
-                                    fontSize: 13,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                              ],
-                            )),
+                        myComunityText('자유게시판', '안녕하세요 잘부탁드립니다.'),
                         Container(
                           height: 5,
                         ),
-                        Padding(
-                            padding: EdgeInsets.fromLTRB(18.0, 0.0, 0.0, 0.0),
-                            child: Row(
-                              children: <Widget>[
-                                Text(
-                                  '비밀게시판',
-                                  style: TextStyle(
-                                    fontSize: 13,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                Container(
-                                  width: 30,
-                                ),
-                                Text(
-                                  '비밀글 입니다..',
-                                  style: TextStyle(
-                                    fontSize: 13,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                              ],
-                            )),
+                        myComunityText('자유게시판', '안녕하세요 잘부탁드립니다.'),
                       ],
                     ),
                   ),
@@ -393,32 +261,6 @@ class MooJaeBae extends StatelessWidget {
             ),
           )
         ],
-      ),
-    );
-  }
-}
-
-class SecondPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(
-          'Second Page',
-        ),
-        //backgroundColor: Colors.white,
-      ),
-      body: Center(
-        child: FlatButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: Text(
-            "뒤로 가기",
-            style: TextStyle(color: Colors.green[400]),
-          ),
-        ),
       ),
     );
   }
